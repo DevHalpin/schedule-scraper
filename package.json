@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "googleapis": "^142.0.0",
+    "moment-timezone": "^0.5.45",
+    "playwright": "^1.45.3"
+  }
+}
