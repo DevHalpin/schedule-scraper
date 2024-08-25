@@ -3,9 +3,6 @@ require("dotenv").config();
 const authenticate = require('./auth');
 const timeZone = process.env.TIME_ZONE || 'America/Vancouver';
 
-const calendar = google.calendar({ version: 'v3', auth: authenticate() });
-const oAuth2Client = authenticate();
-
 function createEvent(eventData) {
   return {
     summary: `Mentoring Session`,
@@ -29,7 +26,9 @@ function createEvent(eventData) {
   };
 }
 
-function addEventsToCalendar(events) {
+const addEventsToCalendar = async (events) => {
+  const oAuth2Client = await authenticate();
+  const calendar = google.calendar({ version: 'v3', auth: oAuth2Client });
   events.forEach((eventData) => {
     const event = createEvent(eventData);
     calendar.events.insert(
